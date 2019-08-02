@@ -11,7 +11,6 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-
       routes: {
         "secondRoute": (context) => SecondRoute(),
         "CountWidgetPage": (context) => CountWidget(),
@@ -103,10 +102,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             Text(
               '$_counter',
-              style: Theme
-                  .of(context)
-                  .textTheme
-                  .display1,
+              style: Theme.of(context).textTheme.display1,
             ),
             FlatButton(
               textColor: Colors.lightBlue,
@@ -164,10 +160,7 @@ class _MyHomePageState extends State<MyHomePage> {
 class SecondRoute extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    var args = ModalRoute
-        .of(context)
-        .settings
-        .arguments;
+    var args = ModalRoute.of(context).settings.arguments;
 
     // TODO: implement build
     return Scaffold(
@@ -291,7 +284,7 @@ class _ParentWidgetState extends State<ParentWidget> {
       body: new Center(
         child: new Container(
           child:
-          new ChildWidget(active: _active, onChanged: _handleWidgetChanged),
+              new ChildWidget(active: _active, onChanged: _handleWidgetChanged),
         ),
       ),
     );
@@ -350,10 +343,7 @@ class _ParentWidgetMulti extends State<ParentWidgetMulti> {
 
   @override
   Widget build(BuildContext context) {
-    var _title = ModalRoute
-        .of(context)
-        .settings
-        .arguments;
+    var _title = ModalRoute.of(context).settings.arguments;
     // TODO: implement build
     return new Scaffold(
       appBar: new AppBar(
@@ -362,28 +352,28 @@ class _ParentWidgetMulti extends State<ParentWidgetMulti> {
       body: new Center(
         child: new Container(
             child: new Column(
-              children: <Widget>[
-                new ChildWidgetMulti(activi: _activi, onchanged: activiChanged),
-                new Image(
-                  image: AssetImage("images/test.png"),
-                  width: 160,
-                  height: 160,
-                ),
-                Image(
-                  image: NetworkImage(
-                      "https://avatars2.githubusercontent.com/u/20411648?s=460&v=4"),
-                  width: 100,
-                  height: 200,
-                  fit: BoxFit.contain,
-                  color: Colors.blueAccent,
-                  colorBlendMode: BlendMode.plus,
-                  repeat: ImageRepeat.repeatY,
-                ),
+          children: <Widget>[
+            new ChildWidgetMulti(activi: _activi, onchanged: activiChanged),
+            new Image(
+              image: AssetImage("images/test.png"),
+              width: 160,
+              height: 160,
+            ),
+            Image(
+              image: NetworkImage(
+                  "https://avatars2.githubusercontent.com/u/20411648?s=460&v=4"),
+              width: 100,
+              height: 200,
+              fit: BoxFit.contain,
+              color: Colors.blueAccent,
+              colorBlendMode: BlendMode.plus,
+              repeat: ImageRepeat.repeatY,
+            ),
 //            Image.network("https://avatars2.githubusercontent.com/u/20411648?s=460&v=4",width: 300,)
-              ],
-            )
+          ],
+        )
 //
-        ),
+            ),
       ),
     );
   }
@@ -441,9 +431,9 @@ class _ChildWidgetMulti extends State<ChildWidgetMulti> {
           color: widget.activi ? Colors.lightGreen[700] : Colors.grey[600],
           border: _hightLine
               ? new Border.all(
-            color: Colors.red,
-            width: 10,
-          )
+                  color: Colors.red,
+                  width: 10,
+                )
               : null,
         ),
       ),
@@ -479,9 +469,9 @@ class _ChildWidgetMulti extends State<ChildWidgetMulti> {
 
 class MyIcons {
   static const IconData book =
-  const IconData(0xe614, fontFamily: "myicon", matchTextDirection: true);
+      const IconData(0xe614, fontFamily: "myicon", matchTextDirection: true);
   static const IconData wechat =
-  const IconData(0xec7d, fontFamily: "myicon", matchTextDirection: true);
+      const IconData(0xec7d, fontFamily: "myicon", matchTextDirection: true);
 }
 
 /*
@@ -576,28 +566,30 @@ class _TextFiledWidgetState extends State<TextFiledWidget> {
 
   @override
   Widget build(BuildContext context) {
-    var args = ModalRoute
-        .of(context)
-        .settings
-        .arguments;
+    var args = ModalRoute.of(context).settings.arguments;
 
     // TODO: implement build
     return Theme(
-        data: Theme.of(context).copyWith(
-            hintColor: Colors.red, //定义下划线颜色
-            inputDecorationTheme: InputDecorationTheme(
-                labelStyle: TextStyle(color: Colors.grey), //定义label字体样式
-                hintStyle: TextStyle(
-                    color: Colors.grey, fontSize: 14.0) //定义提示文本样式
-            )
+      data: Theme.of(context).copyWith(
+//              hintColor: Colors.red, //定义下划线颜色
+          inputDecorationTheme: InputDecorationTheme(
+        labelStyle: TextStyle(color: Colors.grey),
+        //定义label字体样式
+        hintStyle: TextStyle(color: Colors.grey, fontSize: 14.0),
+        //通过定义enableBorder来修改下划线颜色,
+        focusedBorder: UnderlineInputBorder(
+            borderSide: BorderSide(color: Colors.red, width: 2)),
+        enabledBorder: UnderlineInputBorder(
+            borderSide: BorderSide(color: Colors.red, width: 1)),
+      )),
+      child: new Scaffold(
+        appBar: new AppBar(
+          title: Text("$args"),
+          centerTitle: true,
         ),
-        child: new Scaffold(
-          appBar: new AppBar(
-            title: Text("$args"),
-            centerTitle: true,
-          ),
-
-          body: new Column(
+        body: Padding(
+          padding: EdgeInsets.all(20),
+          child: new Column(
             children: <Widget>[
               TextField(
                 keyboardType: TextInputType.phone,
@@ -611,13 +603,6 @@ class _TextFiledWidgetState extends State<TextFiledWidget> {
                     size: 24,
                     color: Colors.blueAccent,
                   ),
-//                  border: UnderlineInputBorder(
-//                    borderSide: BorderSide(
-//                      color: Colors.red,
-//                      width: 5,
-//                    ),
-//                  ),
-//                  hintStyle: TextStyle(color: Colors.grey, fontSize: 16),
                 ),
                 onChanged: (value) {
                   info1 = value;
@@ -627,13 +612,14 @@ class _TextFiledWidgetState extends State<TextFiledWidget> {
               ),
               TextField(
                 decoration: InputDecoration(
-                    labelText: "密码",
-                    hintText: "请输入密码",
-                    prefixIcon: Icon(
-                      Icons.lock,
-                      size: 24,
-                      color: Colors.blueAccent,
-                    )),
+                  labelText: "密码",
+                  hintText: "请输入密码",
+                  prefixIcon: Icon(
+                    Icons.lock,
+                    size: 24,
+                    color: Colors.blueAccent,
+                  ),
+                ),
                 obscureText: true,
                 controller: control2,
                 onChanged: (value) {
@@ -650,8 +636,8 @@ class _TextFiledWidgetState extends State<TextFiledWidget> {
                 },
                 color: Colors.blueAccent,
                 child: Text("登录"),
-                shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20)),
                 materialTapTargetSize: MaterialTapTargetSize.padded,
               ),
               Text("$_info"),
@@ -663,13 +649,14 @@ class _TextFiledWidgetState extends State<TextFiledWidget> {
                 },
                 color: Colors.blueAccent,
                 child: Text("切换焦点"),
-                shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20)),
                 materialTapTargetSize: MaterialTapTargetSize.padded,
               )
             ],
           ),
-        )
+        ),
+      ),
     );
   }
 }
